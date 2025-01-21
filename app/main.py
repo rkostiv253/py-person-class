@@ -9,19 +9,17 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    name_to_person = {}
     result = []
     for person in people:
-        Person.name = person["name"]
-        Person.age = person["age"]
-        result.append(Person.age)
-        result.append(Person.name)
+        single = Person(name=person["name"], age=person["age"])
+        result.append(single)
 
     for person in people:
-        person_instance = name_to_person[person["name"]]
+        name = person["name"]
+        instance = Person.people[name]
         if person.get("wife"):
-            person_instance.wife = name_to_person[person.get("wife")]
+            instance.wife = Person.people[person["wife"]]
         elif person.get("husband"):
-            person_instance.husband = name_to_person[person.get("husband")]
+            instance.husband = Person.people[person["husband"]]
 
-    return list(Person.people)
+    return result
