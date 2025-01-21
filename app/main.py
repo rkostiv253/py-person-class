@@ -9,6 +9,7 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
+    name_to_person = {}
     result = []
     for person in people:
         Person.name = person["name"]
@@ -17,7 +18,10 @@ def create_person_list(people: list) -> list:
         result.append(Person.name)
 
     for person in people:
-        if person.get["wife"] or person.get["husband"]:
-            Person.spouse = person.get("wife") or person.get("husband")
+        person_instance = name_to_person[person["name"]]
+        if person.get("wife"):
+            person_instance.wife = name_to_person[person.get("wife")]
+        elif person.get("husband"):
+            person_instance.husband = name_to_person[person.get("husband")]
 
     return list(Person.people)
